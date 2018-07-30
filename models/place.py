@@ -9,12 +9,12 @@ from sqlalchemy.orm import relationship
 from os import getenv
 from models.amenity import Amenity
 
+
 place_amenity = Table("place_amenity", Base.metadata,
                       Column('place_id', String(60),
                              ForeignKey("places.id"), nullable=False),
                       Column('amenities_id', String(60),
                              ForeignKey("amenities.id"), nullable=False))
-
 
 class Place(BaseModel, Base):
 
@@ -40,7 +40,6 @@ class Place(BaseModel, Base):
                                cascade="all, delete-orphan")
         amenities = relationship(Amenity, secondary=place_amenity,
                                  viewonly=False)
-
     else:
         @property
         def reviews(self):
@@ -69,4 +68,4 @@ class Place(BaseModel, Base):
             for inst in obj:
                 if obj.__class.__name__ == "Amenity":
                     if inst.place_id == self.id:
-                            amenity_ids.append(inst)
+                        amenity_ids.append(inst)
