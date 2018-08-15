@@ -88,6 +88,6 @@ class DBStorage:
 
     def close(self):
         '''
-            call close() method to close private session attribute self.__session
+            call close() method to close session attribute self.__session
         '''
         self.__session.close()
