@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+'''
+    Starts a Flask web application
+'''
 from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes=False
@@ -20,10 +23,10 @@ def hbnb():
 @app.route("/c/<text>")
 def c_route(text):
     """
-        display “C ” followed by the value of the text variable 
+        display “C ” followed by the value of the text variable
     """
     text = text.replace("_", " ")
-    return "C is {}".format(text) 
+    return "C is {}".format(text)
 
 @app.route("/python/<text>", defaults={"text": "is cool"})
 def python_route(text):
