@@ -23,7 +23,7 @@ class FileStorage:
             return self.__objects
         else:
             for k, v in self.__objects.items():
-                if v.__class__.__name__ == cls:
+                if v.__class__ == cls:
                     dict_fs[k] = v
             return dict_fs
 
@@ -70,3 +70,10 @@ class FileStorage:
             key = str(obj.__class__.__name__) + "." + str(obj.id)
             FileStorage().__objects.pop(key, None)
             FileStorage().save()
+
+
+    def close(self):
+        '''
+            call reload method for deserializing JSON file to obj
+        '''
+        self.reload()

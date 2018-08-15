@@ -42,6 +42,9 @@ class BaseModel:
                 else:
                     if "__class__" != key:
                         setattr(self, key, val)
+            if "created_at" not in kwargs.keys():
+                self.created_at = datetime.now()
+                self.updated_at = datetime.now()
 
     def __str__(self):
         '''
