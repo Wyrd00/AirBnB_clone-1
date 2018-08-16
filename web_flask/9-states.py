@@ -31,11 +31,9 @@ def cities_by_states():
         display HTML with cities in States
     """
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        states = storage.all("State")
-        states = list(states.values())
+        states = storage.all("State").values()
     else:
-        states = storage.all(State)
-        states = states.values()
+        states = storage.all(State).values()
 
     return render_template("8-cities_by_states.html", states=states)
 
