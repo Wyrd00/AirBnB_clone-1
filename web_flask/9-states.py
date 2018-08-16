@@ -29,20 +29,14 @@ def cities_by_states():
     """
         display HTML with cities in States
     """
-    city_in_state = []
-
     if getenv("HBNB_TYPE_STORAGE") == "db":
         states = storage.all("State")
         states = list(states.values())
-        for city in states:
-            city_in_state.append(city.name)
     else:
         states = storage.all(State)
         states = states.values()
-        city_in_state = states.cities()
 
-    return render_template("8-cities_by_states.html", states=states,
-                           city_in_state=city)
+    return render_template("8-cities_by_states.html", states=states)
 
 
 @app.route("/states")
@@ -67,11 +61,9 @@ def states_id(id):
     single_state = None
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        states = storage.all("State")
-        state_b = list(states.values())
+        state_b = storage.all("State").values()
     else:
-        states = storage.all(State)
-        state_b = states.values()
+        state_b = storage.all(State).values()
 
     for state in state_b:
         if state.id == id:
