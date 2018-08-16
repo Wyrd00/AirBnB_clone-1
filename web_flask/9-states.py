@@ -44,6 +44,7 @@ def cities_by_states():
     return render_template("8-cities_by_states.html", states=states,
                            city_in_state=city)
 
+
 @app.route("/states")
 def states():
     """
@@ -56,6 +57,7 @@ def states():
     state_a = states.values()
 
     return render_template("9-states.html", state_a=state_a)
+
 
 @app.route("/states/<id>")
 def states_id(id):
@@ -77,6 +79,7 @@ def states_id(id):
     state_b = single_state
 
     return render_template("9-states.html", state_b=state_b)
+
 
 @app.teardown_appcontext
 def tear_down(exception):
