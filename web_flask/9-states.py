@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
+@app.route("/states")
 @app.route("/states_list")
 def states_list():
     """
@@ -39,20 +40,6 @@ def cities_by_states():
     return render_template("8-cities_by_states.html", states=states)
 
 
-@app.route("/states")
-def states():
-    """
-        display HTML with states
-    """
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        states = storage.all("State")
-    else:
-        states = storage.all(State)
-    state_a = states.values()
-
-    return render_template("9-states.html", state_a=state_a)
-
-
 @app.route("/states/<id>")
 def states_id(id):
     """
@@ -61,16 +48,16 @@ def states_id(id):
     single_state = None
 
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        state_b = storage.all("State").values()
+        states = storage.all("State").values()
     else:
-        state_b = storage.all(State).values()
+        states = storage.all(State).values()
 
-    for state in state_b:
+    for state in states:
         if state.id == id:
             single_state = state
-    state_b = single_state
+    states = single_state
 
-    return render_template("9-states.html", state_b=state_b)
+    return render_template("9-states.html", states=states)
 
 
 @app.teardown_appcontext
